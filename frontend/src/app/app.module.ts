@@ -3,7 +3,7 @@
 cd frontend
 ng serve
 
-
+ng update @angular/core
 */
 
 import { NgModule } from '@angular/core';
