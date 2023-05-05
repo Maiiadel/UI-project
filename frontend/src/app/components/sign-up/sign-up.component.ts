@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/services/auth.service';
-import Swal from 'sweetalert2';
+import { Swal } from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UsersService } from 'C:/Users/Mai/UI project/src/app/shared/services/users.service';
+import { UsersService } from '../../shared/services/users.service';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -11,17 +11,19 @@ import { UsersService } from 'C:/Users/Mai/UI project/src/app/shared/services/us
 export class SignUpComponent implements OnInit {
   SignUpForm!: FormGroup;
 
-  constructor(public authService: AuthService, private fb: FormBuilder, userServ:UsersService) {}
+  constructor(
+    public authService: AuthService,
+    private fb: FormBuilder,
+    userServ: UsersService
+  ) {}
   ngOnInit() {
     this.SignUpForm = this.fb.group({
       Fname: ['', Validators.required],
       Lname: ['', Validators.required],
       type: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
-
-
   }
   // ngOnInit() {
   //   this.SignUpForm= new FormGroup({
@@ -31,12 +33,8 @@ export class SignUpComponent implements OnInit {
   // }
   onSubmit(myform: FormGroup) {
     Swal.fire({
-      title: "Successfully Signed Up",
-      icon: "success",
+      title: 'Successfully Signed Up',
+      icon: 'success',
     }).then();
-
-    
   }
-
 }
-
