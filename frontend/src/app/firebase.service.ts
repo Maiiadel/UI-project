@@ -31,8 +31,25 @@ export class FirebaseService {
     let url = this.Root + `/user/${uid}`;
     console.log(url);
     this.user = this.http.post(url, uid);
-
+    // this.user = this.user[uid];
+    console.log(this.user);
+    console.log(`this.user[uid] = ${this.user[uid]}`);
     return this.user;
+  }
+
+  setUser(user: any) {
+    this.user = {
+      user_id: user.user_id,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      user_type: user.user_type,
+      email: user.email,
+      address: user.address,
+      contact_number: user.contact_number,
+      Total_elec_bills: user.Total_elec_bills,
+      Total_subs: user.Total_subs,
+      Total_water_bills: user.Total_water_bills,
+    };
   }
 
   fetchUsers(): Observable<any> {

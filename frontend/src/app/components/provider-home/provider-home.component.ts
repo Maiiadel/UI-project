@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { FirebaseService } from 'src/app/firebase.service';
 
 @Component({
   selector: 'app-provider-home',
@@ -9,11 +9,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class ProviderHomeComponent implements OnInit {
   user: any;
   //providerName:string="Provider Khaled";
-  constructor(private http: HttpClient) {}
+  constructor(private db: FirebaseService) {}
   ngOnInit(): void {
-    // this.userServ.fetchSpecificUser().subscribe((data) => {
-    //   //console.warn("users list : "+ data);
-    //   this.user = data;
-    // });
+    this.user = this.db.user;
+    console.log(
+      `this.user['first_name'] = ${JSON.stringify(this.user['first_name'])}`
+    );
   }
 }
