@@ -14,6 +14,8 @@ import { Bundle } from './components/models/Bundle';
 export class FirebaseService {
   items: any;
   user: any;
+  users: any;
+  userType: any;
 
   readonly Root = 'http://127.0.0.1:8000';
   constructor(private http: HttpClient) {}
@@ -23,14 +25,18 @@ export class FirebaseService {
     return this.items;
   }
 
-  get_user(email: string): Observable<any> {
+  get_user(uid: string): Observable<User> {
     console.log('get_user in FirebaseService Entered');
-    const encodedEmail = encodeURIComponent(email);
-    let url = this.Root + `/${encodedEmail}`;
+    // const encodedEmail = encodeURIComponent(email);
+    let url = this.Root + `/user/${uid}`;
     console.log(url);
-    this.user = this.http.get(url);
+    this.user = this.http.post(url, uid);
 
-    let user = this.http.get(url);
     return this.user;
+  }
+
+  fetchUsers(): Observable<any> {
+    this.users = this.http.get(this.Root + `/users`);
+    return this.users;
   }
 }

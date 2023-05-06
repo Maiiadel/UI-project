@@ -46,7 +46,16 @@ class User:
         db.collection("users").document(new_user.uid).set(data)
         return "User Added"
 
-    def get_user_data(self):
+    def get_users_data(self):
+        docs = db.collection("users").get()
+        users = []
+        for user in docs:
+            # print(user.to_dict())
+            users.append(user.to_dict())
+        # users = docs.to_dict()
+        return users
+
+    def get_user_data_by_email(self):
         # needs user_id only
         self.user_id = self.get_user_id_by_email()
         doc = db.collection("users").document(self.user_id).get()
@@ -61,13 +70,38 @@ class User:
         print(data)
         return data
 
+    def get_user_data_by_id(self):
+        # needs user_id only
+
+        doc = db.collection("users").document(self.user_id).get()
+        print(doc)
+        if doc.exists:
+            print(f"Document data: {doc.to_dict()}")
+        else:
+            print("No such document!")
+
+        data = {}
+        data[doc.id] = doc.to_dict()
+        print(data)
+        return data
+
     def get_user_id_by_email(self, email=""):
         # needs email only
+        self.email = self.email.replace("%40", "@")
         docs = db.collection("users").where("email", "==", self.email).get()
         for doc in docs:
             self.user_id = doc.id
         return self.user_id
 
+    def get_user_bills(self):
+        collections = db.collection("users").document(self.user_id).collections()
+        data = {}
+        for collection in collections:
+            print(collection)
+            for doc in collection.stream():
+                data[doc.id] = doc.to_dict()
+        return data
 
-user = User(email="kirolosyassa2017@gmail.com")
-print(user.get_user_data())
+
+# user = User(email="kirolosyassa2017@gmail.com")
+# print(user.get_user_bills())

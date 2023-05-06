@@ -1,10 +1,10 @@
-'''
+"""
 pip install -r requirements.txt
 
 cd .\backend\
 python -m uvicorn main:app --reload
 
-'''
+"""
 
 from typing import Optional
 from fastapi import FastAPI, Path, HTTPException
@@ -18,6 +18,7 @@ origins = [
     "http://localhost:4200",
     "http://localhost:4200/",
     "http://127.0.0.1/4200",
+    "http://localhost:4200/",
 ]
 app.add_middleware(
     CORSMiddleware,
@@ -25,8 +26,8 @@ app.add_middleware(
     # allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"]
-    )
+    allow_headers=["*"],
+)
 
 
 class User(BaseModel):
@@ -35,34 +36,65 @@ class User(BaseModel):
     email: str
     role: str
     password: str
-    
+
+
 class Project(BaseModel):
     user_id: str
     name: str
     description: str
-    
+
+
 class UploadedFiles(BaseModel):
-      user_id: str
-      project_: str
-      files: dict
-    
+    user_id: str
+    project_: str
+    files: dict
+
+
 class DeletedProject(BaseModel):
-      user_id: str
-      project_id: str
-    
+    user_id: str
+    project_id: str
+
+
 class DeletedFile(BaseModel):
-      user_id: str
-      project_id: str
-      file_name: str
+    user_id: str
+    project_id: str
+    file_name: str
+
+
+# Get from MyProfile Page to display all projects of a single user
+@app.post("/user/{uid}")
+async def get_user(uid: str):
+    print("get_user is activated!")
+    data = getUser(uid)
+    print(data)
+    return data
+
+
+# Get from MyProfile Page to display all projects of a single user
+@app.get("/users")
+async def get_users():
+    print("get_users is activated!")
+    data = getUsers()
+    print(data)
+    return data
+
+
+# # Get from MyProfile Page to display all projects of a single user
+# @app.post("/user/{uid}")
+# async def get_user_type(uid: str):
+#     print("get_users is activated!")
+#     data = getUserType()
+#     print(data)
+#     return data
 
 
 # Delete specific project of a single user
 @app.delete("/single_file/")
 async def delete_file(deleted_file: DeletedFile):
     deletedFile_data = {
-    "user_id": deleted_file.user_id,
-    "project_id":  deleted_file.project_id,
-    "file_name": deleted_file.file_name,
+        "user_id": deleted_file.user_id,
+        "project_id": deleted_file.project_id,
+        "file_name": deleted_file.file_name,
     }
     print("delete_file is activated!")
     user_id = deletedFile_data["user_id"]
@@ -104,22 +136,13 @@ async def get_items():
     return {"data": data}
 
 
-# Get from MyProfile Page to display all projects of a single user
-@app.get("/{email}")
-async def get_user(email:str):
-    print("get_user is activated!")
-    data = getUser(email)
-    print(data)
-    return {"data": data}
-
-
 @app.post("/signup")
 def signup(user: User):
     try:
         user_data = {
             "first_name": user.first_name,
             "last_name": user.last_name,
-            "email": user.email, 
+            "email": user.email,
             "password": user.password,
             "role": user.role,
         }

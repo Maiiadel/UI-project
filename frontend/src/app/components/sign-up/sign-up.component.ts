@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/services/auth.service';
-import Swal from 'sweetalert2/dist/sweetalert2.js';  
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UsersService } from '../../shared/services/users.service';
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -14,13 +14,14 @@ export class SignUpComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private fb: FormBuilder,
-    userServ: UsersService
   ) {}
   ngOnInit() {
     this.SignUpForm = this.fb.group({
       Fname: ['', Validators.required],
       Lname: ['', Validators.required],
       type: ['', Validators.required],
+      address: ['', Validators.required],
+      contact_number: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });

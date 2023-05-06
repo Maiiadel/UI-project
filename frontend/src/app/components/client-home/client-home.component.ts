@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../../shared/services/users.service';
+import { FirebaseService } from 'src/app/firebase.service';
 @Component({
   selector: 'app-client-home',
   templateUrl: './client-home.component.html',
@@ -8,11 +8,8 @@ import { UsersService } from '../../shared/services/users.service';
 export class ClientHomeComponent implements OnInit {
   clientName: string = 'Client Mai';
   Userslist = [];
-  constructor(private usersservice: UsersService) {}
+  constructor(private db: FirebaseService) {}
   ngOnInit(): void {
-    this.usersservice.fetchUsers().subscribe((data) => {
-      console.log(data);
-      // this.Userslist=data;
-    });
+    console.log(this.db.user);
   }
 }
