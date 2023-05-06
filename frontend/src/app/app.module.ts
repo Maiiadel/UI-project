@@ -41,6 +41,8 @@ import { ProviderHomeComponent } from './components/provider-home/provider-home.
 
 // Services
 import { AuthService } from './shared/services/auth.service';
+import { FirebaseService } from './firebase.service';
+// import { FirebaseApp } from '@angular/fire/app';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,7 @@ import { AuthService } from './shared/services/auth.service';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFireAuth,
+    AngularFirestoreModule.enablePersistence(),
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
@@ -74,7 +76,7 @@ import { AuthService } from './shared/services/auth.service';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, FirebaseService],
   bootstrap: [AppComponent],
 })
 export class AppModule {

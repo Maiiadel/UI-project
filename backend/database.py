@@ -1,6 +1,5 @@
 from databaseStructure import *
 from databaseClasses.Project import Project
-from databaseClasses.File import File
 from databaseClasses.User import User
 from databaseClasses.Item import Item
 
@@ -10,6 +9,10 @@ def getItems():
     data = project.get_items()
     return data
 
+
+def getUser(email):
+    user = User(email=email)
+    return user.get_user_data()
 
 def delete_file(deleted_file):
     file_wanted_to_be_deleted = File(file_name = deleted_file["file_name"],)
@@ -59,13 +62,3 @@ def add_single_project(user_id, project_name, description):
     return response
     
     
-def send_project_files_URLs(user_id, project_id):
-    project_data = get_specific_project(user_id=user_id,
-                                        project_id=project_id)
-    files = [value["url_reference"] for (key,value) in project_data[project_id]["files"].items()]
-    print(f'FILES IN SEND_PROJECT_FILES = {files}')
-    return  files
-    
-
-def upload_generated_UML_image_to_firebase():
-    pass

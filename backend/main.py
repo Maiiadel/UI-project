@@ -104,6 +104,14 @@ async def get_items():
     return {"data": data}
 
 
+# Get from MyProfile Page to display all projects of a single user
+@app.get("/{email}")
+async def get_user(email:str):
+    print("get_user is activated!")
+    data = getUser(email)
+    print(data)
+    return {"data": data}
+
 
 @app.post("/signup")
 def signup(user: User):

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-//importing components 
+//importing components
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -33,18 +33,17 @@ const routes: Routes = [
   { path: 'ProviderAddBundle/:id', component: ProviderAddBundleComponent },
   { path: 'ProviderHome/:id', component: ProviderHomeComponent },
 
-  // for testing only 
+  // for testing only
   { path: 'ClientHome', component: ClientHomeComponent },
   { path: 'ProviderHome', component: ProviderHomeComponent },
-  // fel client bills 3ayzeen n3ml 7esab eno ypreview el water bs w el electricity bs 
+  // fel client bills 3ayzeen n3ml 7esab eno ypreview el water bs w el electricity bs
   { path: 'ClientBills', component: ClientBillsComponent },
   { path: 'ClientProfile', component: ClientProfileComponent },
   { path: 'ProviderProfile', component: ProviderProfileComponent },
   { path: 'ProviderAddBundle', component: ProviderAddBundleComponent },
-  
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

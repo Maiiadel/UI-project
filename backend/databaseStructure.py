@@ -11,7 +11,7 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
 cred = credentials.Certificate(credential_path)
 firebase_admin.initialize_app(cred, {
-    'storageBucket': 'ba-automation-5a4ae.appspot.com'
+    'storageBucket': 'invoice-system-45199.appspot.com'
 })
 firestore_client = firestore.client()
 

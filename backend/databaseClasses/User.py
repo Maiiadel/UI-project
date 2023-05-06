@@ -1,26 +1,38 @@
-from databaseClasses import File
 from database import *
 
 
 class User:
-                
-    
-    def __init__(self, user_id="", email="", first_name="", last_name="", role="", projects=[]):
+    def __init__(
+        self,
+        user_id="",
+        first_name="",
+        last_name="",
+        email="",
+        user_type="",
+        address="",
+        contact_number="",
+        Total_elec_bills="",
+        Total_subs="",
+        Total_water_bills="",
+    ):
         self.user_id = user_id
-        self.email = email
         self.first_name = first_name
         self.last_name = last_name
-        self.role = role
-        self.projects = projects
-        
-        
+        self.email = email
+        self.user_type = user_type
+        self.address = address
+        self.contact_number = contact_number
+        self.Total_elec_bills = Total_elec_bills
+        self.Total_subs = Total_subs
+        self.Total_water_bills = Total_water_bills
+
     def add_user(self):
         # needs to email & first_name & last_name & role
         data = {
-        "first_name": self.first_name,
-        "last_name": self.last_name,
-        "email": self.email,
-        "role": self.role,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "email": self.email,
+            "role": self.role,
         }
         # Add the user to the AuthenticationManager
         try:
@@ -33,27 +45,29 @@ class User:
         # Add the user to Cloud firestore
         db.collection("users").document(new_user.uid).set(data)
         return "User Added"
-        
-    
+
     def get_user_data(self):
         # needs user_id only
-
+        self.user_id = self.get_user_id_by_email()
         doc = db.collection("users").document(self.user_id).get()
         print(doc)
         if doc.exists:
-            print(f'Document data: {doc.to_dict()}')
+            print(f"Document data: {doc.to_dict()}")
         else:
-            print(u'No such document!')
+            print("No such document!")
 
         data = {}
         data[doc.id] = doc.to_dict()
         print(data)
         return data
-    
-    
-    def get_user_id_by_email(self):
+
+    def get_user_id_by_email(self, email=""):
         # needs email only
         docs = db.collection("users").where("email", "==", self.email).get()
         for doc in docs:
             self.user_id = doc.id
         return self.user_id
+
+
+user = User(email="kirolosyassa2017@gmail.com")
+print(user.get_user_data())
