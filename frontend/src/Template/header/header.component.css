@@ -1,12 +1,10 @@
-$headerColor: #146c94;
-$backColor: #fff4e0;
-
 .logo {
   width: 3rem;
   height: 2rem;
 }
+
 .navbar-brand {
-  color: $backColor;
+  color: #fff4e0;
 }
 
 ul {
@@ -24,25 +22,27 @@ ul a:hover {
 }
 
 header {
-  background-color: $headerColor;
+  background-color: #146c94;
 }
 
 .logo-box {
   height: 10rem;
   cursor: move;
 }
+
 body,
 html {
-  background-color: $backColor;
+  background-color: #fff4e0;
 }
 
 .app {
-  background-color: $backColor;
+  background-color: #fff4e0;
 }
+
 nav {
-  background-color: $headerColor;
+  background-color: #146c94;
 }
 
 .nav-link {
   color: #404040;
-}
+}/*# sourceMappingURL=header.component.css.map */

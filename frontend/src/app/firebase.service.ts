@@ -7,6 +7,7 @@ import { Item } from './components/models/Item';
 import { User } from './components/models/User';
 import { Bill } from './components/models/Bill';
 import { Bundle } from './components/models/Bundle';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',

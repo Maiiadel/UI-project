@@ -1,4 +1,5 @@
-<div class="displayTable ">
+<app-header></app-header>
+<div class="displayTable">
   <div class="displayTableCell">
     <div class="authBlock">
       <h3>Thank You for Registering</h3>
@@ -17,7 +18,7 @@
       <div class="formGroup">
         <button
           type="button"
-          class="btn btnPrimary"
+          className="btn btn-primary"
           (click)="authService.SendVerificationMail()"
         >
           <i class="fas fa-redo-alt"></i>
@@ -27,10 +28,9 @@
     </div>
     <div class="redirectToLogin">
       <span
-        >Go back to?<span class="redirect" routerLink="/sign-in">
-          Sign in</span
-        ></span
+        >Go back to?<a class="redirect" routerLink="/sign-in"> Sign in</a></span
       >
     </div>
   </div>
 </div>
+<app-footer></app-footer>

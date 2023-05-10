@@ -165,6 +165,8 @@ export class AuthService {
   }
   // Sign out
   SignOut() {
+    console.log('Signed out Entered');
+
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
       this.router.navigate(['sign-in']);
